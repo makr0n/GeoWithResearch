@@ -1,18 +1,30 @@
 public class Main {
     public static void main(String[] args) {
-        Person irina = new Person("Ирина");
-        Person vasya = new Person("Вася");
-        Person masha = new Person("Маша");
-        Person jane = new Person("Женя");
-        Person ivan = new Person("Ваня");
-        GeoTree gt = new GeoTree();
-        gt.append(irina, vasya);
-        gt.append(irina, masha);
-        gt.append(vasya, jane);
-        gt.append(vasya, ivan);
+        Person irina = new Person("Ирина", Gender.female);
+        Person vasya = new Person("Вася", Gender.male);
+        Person masha = new Person("Маша", Gender.female);
+        Person jane = new Person("Женя", Gender.female);
+        Person ivan = new Person("Ваня", Gender.male);
+        Person nik = new Person("Коля", Gender.male);
 
-        System.out.println(new Reserch(gt).spend(irina,
-                Relationship.parent));
+        GeoTree gt = new GeoTree();
+        gt.relations(nik, irina);
+        gt.relations(irina, vasya);
+        gt.relations(irina, masha);
+        gt.relations(irina, ivan);
+        gt.relations(vasya, jane);
+        gt.relations(vasya, ivan);
+
+
+        new Research(gt).familyMembers(irina,
+                Relationship.parent);
+        new Research(gt).familyMembers(vasya,
+                Relationship.parent);
+        new Research(gt).familyMembers(irina,
+                Relationship.children);
+        new Research(gt).familyMembers(vasya,
+                Relationship.children);
+
     }
 
 }
